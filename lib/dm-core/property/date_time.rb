@@ -19,6 +19,8 @@ module DataMapper
       def typecast_to_primitive(value)
         if value.is_a?(::Hash) || value.respond_to?(:to_mash)
           typecast_hash_to_datetime(value)
+        elsif value.respond_to?(:to_datetime)
+          value.to_datetime
         else
           ::DateTime.parse(value.to_s)
         end
